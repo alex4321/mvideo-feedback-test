@@ -2,7 +2,7 @@ from joblib import Parallel, delayed
 import numpy as np
 from sklearn.model_selection import StratifiedKFold
 from sklearn.metrics import f1_score, mean_absolute_error, mean_squared_error
-from .imbalanced_class_sample_weights import imbalanced_class_sample_weights
+from .imbalanced_class_sample_weights import class_sample_weights
 
 
 def _get_scoring(name):
@@ -13,9 +13,9 @@ def _get_scoring(name):
         "mae": lambda y_true, y_pred: mean_absolute_error(y_true, y_pred),
         "mse": lambda y_true, y_pred: mean_squared_error(y_true, y_pred),
         "mae_imb": lambda y_true, y_pred: mean_absolute_error(y_true, y_pred,
-                                                              sample_weight=imbalanced_class_sample_weights(y_true)),
+                                                              sample_weight=class_sample_weights(y_true)),
         "mse_imb": lambda y_true, y_pred: mean_squared_error(y_true, y_pred,
-                                                             sample_weight=imbalanced_class_sample_weights(y_true)),
+                                                             sample_weight=class_sample_weights(y_true)),
     }
     assert name in scorings, "Invalid scoring name"
     return scorings[name]

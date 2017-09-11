@@ -1,2 +1,2 @@
-from .imbalanced_class_sample_weights import imbalanced_class_sample_weights
+from .imbalanced_class_sample_weights import class_sample_weights, class_weights
 from .multimetric_cv import multimetric_cv
